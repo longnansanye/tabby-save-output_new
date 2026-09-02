@@ -1,5 +1,5 @@
 {
-  "name": "tabby-save-output",
+  "name": "@longnansanye/tabby-save-output",
   "version": "3.2.4",
   "description": "Lets you stream console output into a file",
   "keywords": [
@@ -52,5 +52,6 @@
     "webpack": "^5.24.4",
     "webpack-cli": "^4.5.0"
   },
-  "repository": "longnansanye/tabby-save-output_new"
+  "repository": "longnansanye/tabby-save-output_new",
+  "access": "public"
 }
