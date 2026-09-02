@@ -1,9 +1,9 @@
 {
   "name": "tabby-save-output",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "description": "Lets you stream console output into a file",
   "keywords": [
-    "tabby-plugin"
+    "tabby-plugin", "save-output", "terminal-log"
   ],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -15,23 +15,27 @@
   "files": [
     "dist"
   ],
-  "author": "Eugene Pankov",
+  "author": "longnansanye",
   "license": "MIT",
   "devDependencies": {
-    "@angular/animations": "^7.2.8",
-    "@angular/common": "^7.2.8",
-    "@angular/core": "^7.2.8",
-    "@angular/forms": "^7.2.8",
-    "@angular/platform-browser": "^7.2.8",
-    "@ng-bootstrap/ng-bootstrap": "^2.2.0",
+    "@angular/animations": "^9.1.9",
+    "@angular/common": "^9.1.9",
+    "@angular/core": "^9.1.9",
+    "@angular/forms": "^9.1.9",
+    "@angular/platform-browser": "^9.1.9",
+    "@angular/platform-browser-dynamic": "^9.1.9",
+    "@angular/compiler": "^9.1.9",
+    "@angular/compiler-cli": "^9.1.9",
+    "@ng-bootstrap/ng-bootstrap": "^6.0.0",
+    "ngx-toastr": "^12.1.0",
+    "rxjs": "^6.5.5",
+    "zone.js": "^0.10.3",
     "@types/webpack-env": "^1.16.0",
     "apply-loader": "^2.0.0",
     "css-loader": "^5.1.1",
     "electron": "^7.0.0",
-    "ngx-toastr": "^8.8.0",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
-    "rxjs": "^6.2.1",
     "sanitize-filename": "^1.6.3",
     "sass": "^1.69.0",
     "sass-loader": "^11.0.1",
@@ -40,15 +44,11 @@
     "tabby-core": "^1.0.140",
     "tabby-electron": "^1.0.140",
     "tabby-settings": "^1.0.140",
-    "tabby-ssh": "^1.0.140",
     "tabby-terminal": "^1.0.140",
     "ts-loader": "^9.5.1",
-    "typescript": "~4.9.5",
+    "typescript": "~3.8.3",
     "webpack": "^5.24.4",
     "webpack-cli": "^4.5.0"
   },
-  "peerDependencies": {
-    "@angular/core": "^4.0.1"
-  },
-  "repository": "eugeny/tabby-save-output"
+  "repository": "longnansanye/tabby-save-output_new"
 }
