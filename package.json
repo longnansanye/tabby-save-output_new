@@ -1,9 +1,11 @@
 {
   "name": "tabby-save-output",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "description": "Lets you stream console output into a file",
   "keywords": [
-    "tabby-plugin", "save-output", "terminal-log"
+    "tabby-plugin",
+    "save-output",
+    "terminal-log"
   ],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
