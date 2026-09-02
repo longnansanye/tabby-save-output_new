@@ -5,16 +5,17 @@
 This plugin lets you stream console output into a file.
 
 ![](https://github.com/Eugeny/tabby-save-output/raw/master/screenshot.png)
+<img width="938" height="437" alt="image" src="https://github.com/user-attachments/assets/16ff9430-1bb7-4c43-bdbe-9ade03cdf088" />
 
 ## Usage
 
-- Right-click a terminal tab ¡ú **Start recording output** to begin logging to the configured directory and filename template.
-- Click **Stop** on the overlay (or right-click ¡ú **Stop recording output**) to finish.
+- Right-click a terminal tab Â¡Ãº **Start recording output** to begin logging to the configured directory and filename template.
+- Click **Stop** on the overlay (or right-click Â¡Ãº **Stop recording output**) to finish.
 - **Save output to file...** still opens a save dialog when you want to pick a path manually.
 
 ## Settings
 
-In **Settings ¡ú Save Output** you can configure:
+In **Settings Â¡Ãº Save Output** you can configure:
 
 | Setting | Description |
 | --- | --- |
@@ -24,10 +25,10 @@ In **Settings ¡ú Save Output** you can configure:
 
 Supported placeholders in the filename template:
 
-- `$(date +FORMAT)` ¡ª e.g. `$(date +%Y%m%d%H%M%S)` or `$(date +%Y%m%S)`
-- `$(hostname)` ¡ª terminal/session host (SSH host, etc.), not the local PC name
-- `$(localHostname)` ¡ª this computer's OS hostname
-- `$(title)` ¡ª terminal tab title
+- `$(date +FORMAT)` Â¡Âª e.g. `$(date +%Y%m%d%H%M%S)` or `$(date +%Y%m%S)`
+- `$(hostname)` Â¡Âª terminal/session host (SSH host, etc.), not the local PC name
+- `$(localHostname)` Â¡Âª this computer's OS hostname
+- `$(title)` Â¡Âª terminal tab title
 
 Default template: `$(date +%Y%m%d%H%M%S)-$(hostname).log`
 
