@@ -2,6 +2,7 @@
 import { Component } from '@angular/core'
 import { ConfigService } from 'tabby-core'
 import { ElectronHostWindow, ElectronService } from 'tabby-electron'
+import { DEFAULT_FILENAME_TEMPLATE, expandFilenameTemplate } from './util'
 
 /** @hidden */
 @Component({
@@ -13,6 +14,11 @@ export class SaveOutputSettingsTabComponent {
         private electron: ElectronService,
         private hostWindow: ElectronHostWindow,
     ) { }
+
+    get previewFilename (): string {
+        const template = this.config.store.saveOutput.filenameTemplate || DEFAULT_FILENAME_TEMPLATE
+        return expandFilenameTemplate(template)
+    }
 
     async pickDirectory (): Promise<void> {
         const paths = (await this.electron.dialog.showOpenDialog(

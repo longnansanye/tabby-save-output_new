@@ -6,7 +6,14 @@ import { Injectable } from '@angular/core'
 import { ConfigService } from 'tabby-core'
 import { TerminalDecorator, BaseTerminalTabComponent, BaseSession } from 'tabby-terminal'
 import { SSHTabComponent } from 'tabby-ssh'
-import { cleanupOutput } from './util'
+import {
+    cleanupOutput,
+    DEFAULT_FILENAME_TEMPLATE,
+    expandFilenameTemplate,
+    LineTimestampState,
+    prefixLineTimestamps,
+    resolveTabHostname,
+} from './util'
 
 @Injectable()
 export class SaveOutputDecorator extends TerminalDecorator {
@@ -34,13 +41,25 @@ export class SaveOutputDecorator extends TerminalDecorator {
     }
 
     private attachToSession (session: BaseSession, tab: BaseTerminalTabComponent) {
-        let outputPath = this.generatePath(tab)
+        const startedAt = new Date()
+        let outputPath = this.generatePath(tab, startedAt)
+        try {
+            fs.mkdirSync(path.dirname(outputPath), { recursive: true })
+        } catch {
+            // Best-effort; write stream will fail if path is invalid.
+        }
+
         const stream = fs.createWriteStream(outputPath)
         let dataLength = 0
+        const insertTimestamps = !!this.config.store.saveOutput.insertTimestamps
+        const timestampState: LineTimestampState = { atLineStart: true }
 
         // wait for the title to settle
         setTimeout(() => {
-            let newPath = this.generatePath(tab)
+            let newPath = this.generatePath(tab, startedAt)
+            if (newPath === outputPath) {
+                return
+            }
             fs.rename(outputPath, newPath, err => {
                 if (!err) {
                     outputPath = newPath
@@ -50,6 +69,9 @@ export class SaveOutputDecorator extends TerminalDecorator {
 
         session.output$.subscribe(data => {
             data = cleanupOutput(data)
+            if (insertTimestamps) {
+                data = prefixLineTimestamps(data, timestampState)
+            }
             dataLength += data.length
             stream.write(data, 'utf8')
         })
@@ -62,9 +84,14 @@ export class SaveOutputDecorator extends TerminalDecorator {
         })
     }
 
-    private generatePath (tab: BaseTerminalTabComponent): string {
+    private generatePath (tab: BaseTerminalTabComponent, date: Date = new Date()): string {
         let outputPath = this.config.store.saveOutput.autoSaveDirectory || os.homedir()
-        let outputName = new Date().toISOString() + ' - ' + (tab.customTitle || tab.title || 'Untitled') + '.txt'
+        const template = this.config.store.saveOutput.filenameTemplate || DEFAULT_FILENAME_TEMPLATE
+        let outputName = expandFilenameTemplate(template, {
+            title: tab.customTitle || tab.title || 'Untitled',
+            hostname: resolveTabHostname(tab),
+            date,
+        })
         outputName = sanitizeFilename(outputName)
         return path.join(outputPath, outputName)
     }

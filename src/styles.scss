@@ -11,4 +11,12 @@ tab-body .content .save-output-ui {
 
     display: inline-flex;
     align-items: center;
+    max-width: calc(100% - 40px);
+}
+
+tab-body .content .save-output-ui .save-output-path {
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

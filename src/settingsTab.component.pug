@@ -13,10 +13,10 @@ h3 Save Output
         option(ngValue='off') Off
 
 
-.form-line(*ngIf='config.store.saveOutput.autoSave !== "off"')
+.form-line
     .header
-        .title Directory
-        .description Destination path for the logs
+        .title Output directory
+        .description Destination path for manual and automatic recordings
     .input-group
         input.form-control(
             type='text',
@@ -27,3 +27,31 @@ h3 Save Output
         .input-group-append
             button.btn.btn-secondary((click)='pickDirectory()')
                 i.fas.fa-folder-open
+
+
+.form-line
+    .header
+        .title Filename template
+        .description Supports $(date +%Y%m%d%H%M%S), $(hostname)=session host, $(localHostname), $(title)
+    input.form-control(
+        type='text',
+        [(ngModel)]='config.store.saveOutput.filenameTemplate',
+        (ngModelChange)='config.save()',
+        placeholder='$(date +%Y%m%d%H%M%S)-$(hostname).log'
+    )
+
+.form-line(*ngIf='previewFilename')
+    .header
+        .title Preview
+        .description Example filename with the current template
+    .text-muted {{ previewFilename }}
+
+
+.form-line
+    .header
+        .title Insert line timestamps
+        .description Prefix each log line with yyyy-mm-dd HH:MM:SS.xxx
+    toggle(
+        [(ngModel)]='config.store.saveOutput.insertTimestamps',
+        (ngModelChange)='config.save()'
+    )
